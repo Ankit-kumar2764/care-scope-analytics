@@ -65,7 +65,10 @@ function SidebarContent({ collapsed, onNavigate }: { collapsed: boolean; onNavig
           <NavLink
             key={item.path}
             to={item.path}
+
+
             onClick={onNavigate}
+
             className={({ isActive }) =>
               cn(
                 'group flex items-center gap-3 rounded-[14px] px-4 py-3 text-sm font-medium transition-all duration-200',
@@ -212,9 +215,8 @@ export function DashboardLayout() {
   const location = useLocation();
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
-
+  setMobileOpen(false);
+}, [location.pathname]);
 
 
   const breadcrumb = useMemo(() => {
