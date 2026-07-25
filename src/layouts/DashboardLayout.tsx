@@ -310,9 +310,7 @@ export function DashboardLayout() {
 
           <main className="relative flex-1 overflow-x-hidden">
             <div className="mx-auto max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
-              <PageTransition>
-                <Outlet />
-              </PageTransition>
+               <Outlet />
             </div>
           </main>
         </div>
