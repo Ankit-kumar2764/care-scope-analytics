@@ -12,16 +12,46 @@ export default function PatientsPage() {
   const [status, setStatus] = useState('All');
   const [risk, setRisk] = useState('All');
   const [page, setPage] = useState(1);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  if (isLoading || !data) return <LoadingState title="Loading patients" description="Fetching the mock patient registry and care profiles." />;
 
-  const filtered = useMemo(() => data.filter((patient) => {
-    const matchesSearch = [patient.name, patient.department, patient.doctorAssigned, patient.mrn].some((value) => value.toLowerCase().includes(search.toLowerCase()));
-    const matchesStatus = status === 'All' || patient.status === status;
-    const matchesRisk = risk === 'All' || patient.risk === risk;
+
+
+
+const [selectedId, setSelectedId] = useState<string | null>(null);
+
+const filtered = useMemo(() => {
+  if (!data) return [];
+
+  return data.filter((patient) => {
+    const matchesSearch = [
+      patient.name,
+      patient.department,
+      patient.doctorAssigned,
+      patient.mrn,
+    ].some((value) =>
+      value.toLowerCase().includes(search.toLowerCase())
+    );
+
+    const matchesStatus =
+      status === "All" || patient.status === status;
+
+    const matchesRisk =
+      risk === "All" || patient.risk === risk;
+
     return matchesSearch && matchesStatus && matchesRisk;
-  }), [data, search, status, risk]);
+  });
+}, [data, search, status, risk]);
+
+if (isLoading || !data) {
+  return (
+    <LoadingState
+      title="Loading patients"
+      description="Fetching the mock patient registry and care profiles."
+    />
+  );
+}
+
+
 
   const perPage = 10;
   const pages = Math.max(1, Math.ceil(filtered.length / perPage));

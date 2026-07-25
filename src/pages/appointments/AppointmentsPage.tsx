@@ -8,18 +8,43 @@ import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from '@/compo
 import { shortDate } from '@/utils/format';
 
 export default function AppointmentsPage() {
+
+
+
   const { data, isLoading } = useQuery({ queryKey: ['appointments'], queryFn: mockApi.getAppointments });
   const [monthDate, setMonthDate] = useState(new Date());
 
-  if (isLoading || !data) return <LoadingState title="Loading scheduling module" description="Building the month calendar, doctor availability, and appointment cards." />;
+  const monthAppointments = useMemo(() => {
+  if (!data) return [];
 
-  const monthAppointments = useMemo(() => data.filter((appointment) => format(new Date(appointment.date), 'yyyy-MM') === format(monthDate, 'yyyy-MM')), [data, monthDate]);
-  const days = useMemo(() => {
-    const start = startOfMonth(monthDate);
-    const end = endOfMonth(monthDate);
-    const count = end.getDate();
-    return Array.from({ length: count }, (_, index) => addDays(start, index));
-  }, [monthDate]);
+  return data.filter(
+    (appointment) =>
+      format(new Date(appointment.date), "yyyy-MM") ===
+      format(monthDate, "yyyy-MM")
+  );
+}, [data, monthDate]);
+
+const days = useMemo(() => {
+  const start = startOfMonth(monthDate);
+  const end = endOfMonth(monthDate);
+  const count = end.getDate();
+
+  return Array.from(
+    { length: count },
+    (_, index) => addDays(start, index)
+  );
+}, [monthDate]);
+
+if (isLoading || !data) {
+  return (
+    <LoadingState
+      title="Loading scheduling module"
+      description="Building the month calendar, doctor availability, and appointment cards."
+    />
+  );
+}
+
+
 
   const upcoming = data.filter((appointment) => appointment.status === 'Confirmed').slice(0, 6);
 

@@ -13,10 +13,29 @@ export default function DiagnosticsPage() {
   const [status, setStatus] = useState('All');
   const [selected, setSelected] = useState<string | null>(null);
 
-  if (isLoading || !data) return <LoadingState title="Loading diagnostic reports" description="Fetching mock blood tests, MRI, CT, ECG, X-Ray, and lab reports." />;
 
-  const filtered = useMemo(() => data.filter((report) => (type === 'All' || report.type === type) && (status === 'All' || report.status === status)), [data, type, status]);
-  const active = filtered.find((report) => report.id === selected) ?? filtered[0];
+const filtered = useMemo(() => {
+  if (!data) return [];
+
+  return data.filter(
+    (report) =>
+      (type === "All" || report.type === type) &&
+      (status === "All" || report.status === status)
+  );
+}, [data, type, status]);
+
+const active =
+  filtered.find((report) => report.id === selected) ?? filtered[0];
+
+if (isLoading || !data) {
+  return (
+    <LoadingState
+      title="Loading diagnostic reports"
+      description="Fetching mock blood tests, MRI, CT, ECG, X-Ray, and lab reports."
+    />
+  );
+}
+
 
   return (
     <div className="space-y-6">

@@ -41,16 +41,55 @@ export default function MonitoringPage() {
     });
   }, 1800);
 
-  if (isLoading || !data) return <LoadingState title="Loading live monitoring" description="Initialising interval-based mock sensor updates and capacity views." />;
-
   const tracking = useMemo(() => [
-    { label: 'Heart Rate', value: pulse, icon: <HeartPulse className="h-5 w-5" />, tone: 'danger' as const, suffix: 'bpm' },
-    { label: 'Blood Pressure', value: bloodPressure, icon: <Activity className="h-5 w-5" />, tone: 'info' as const },
-    { label: 'ICU Occupancy', value: `${icu}%`, icon: <Siren className="h-5 w-5" />, tone: 'warning' as const },
-    { label: 'Ventilator Usage', value: `${ventilator}%`, icon: <Wind className="h-5 w-5" />, tone: 'primary' as const },
-    { label: 'Emergency Queue', value: queue, icon: <Ambulance className="h-5 w-5" />, tone: 'danger' as const, suffix: 'patients' },
-    { label: 'Hospital Capacity', value: `${capacity}%`, icon: <Activity className="h-5 w-5" />, tone: 'success' as const },
-  ], [pulse, bloodPressure, icu, ventilator, queue, capacity]);
+  {
+    label: 'Heart Rate',
+    value: pulse,
+    icon: <HeartPulse className="h-5 w-5" />,
+    tone: 'danger' as const,
+    suffix: 'bpm',
+  },
+  {
+    label: 'Blood Pressure',
+    value: bloodPressure,
+    icon: <Activity className="h-5 w-5" />,
+    tone: 'info' as const,
+  },
+  {
+    label: 'ICU Occupancy',
+    value: `${icu}%`,
+    icon: <Siren className="h-5 w-5" />,
+    tone: 'warning' as const,
+  },
+  {
+    label: 'Ventilator Usage',
+    value: `${ventilator}%`,
+    icon: <Wind className="h-5 w-5" />,
+    tone: 'primary' as const,
+  },
+  {
+    label: 'Emergency Queue',
+    value: queue,
+    icon: <Ambulance className="h-5 w-5" />,
+    tone: 'danger' as const,
+    suffix: 'patients',
+  },
+  {
+    label: 'Hospital Capacity',
+    value: `${capacity}%`,
+    icon: <Activity className="h-5 w-5" />,
+    tone: 'success' as const,
+  },
+], [pulse, bloodPressure, icu, ventilator, queue, capacity]);
+
+if (isLoading || !data) {
+  return (
+    <LoadingState
+      title="Loading live monitoring"
+      description="Initialising interval-based mock sensor updates and capacity views."
+    />
+  );
+}
 
   return (
     <div className="space-y-6">
