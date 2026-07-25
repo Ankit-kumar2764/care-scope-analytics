@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ds-background: 248 250 252;
+    --ds-foreground: 15 23 42;
+    --ds-card: 255 255 255;
+    --ds-card-foreground: 15 23 42;
+    --ds-primary: 37 99 235;
+    --ds-primary-foreground: 255 255 255;
+    --ds-secondary: 29 78 216;
+    --ds-secondary-foreground: 255 255 255;
+    --ds-muted: 226 232 240;
+    --ds-muted-foreground: 71 85 105;
+    --ds-accent: 219 234 254;
+    --ds-accent-foreground: 30 58 138;
+    --ds-border: 219 228 240;
+    --ds-input: 219 228 240;
+    --ds-ring: 37 99 235;
+    --ds-success: 22 163 74;
+    --ds-success-foreground: 255 255 255;
+    --ds-warning: 245 158 11;
+    --ds-warning-foreground: 17 24 39;
+    --ds-danger: 220 38 38;
+    --ds-danger-foreground: 255 255 255;
+    --ds-info: 14 165 233;
+    --ds-info-foreground: 255 255 255;
+    color-scheme: light;
+  }
+
+  .dark {
+    --ds-background: 15 23 42;
+    --ds-foreground: 226 232 240;
+    --ds-card: 17 28 51;
+    --ds-card-foreground: 248 250 252;
+    --ds-primary: 59 130 246;
+    --ds-primary-foreground: 255 255 255;
+    --ds-secondary: 29 78 216;
+    --ds-secondary-foreground: 255 255 255;
+    --ds-muted: 30 41 59;
+    --ds-muted-foreground: 148 163 184;
+    --ds-accent: 37 99 235;
+    --ds-accent-foreground: 219 234 254;
+    --ds-border: 148 163 184;
+    --ds-input: 148 163 184;
+    --ds-ring: 59 130 246;
+    --ds-success: 34 197 94;
+    --ds-success-foreground: 5 46 22;
+    --ds-warning: 251 191 36;
+    --ds-warning-foreground: 17 24 39;
+    --ds-danger: 239 68 68;
+    --ds-danger-foreground: 255 255 255;
+    --ds-info: 56 189 248;
+    --ds-info-foreground: 8 47 73;
+    color-scheme: dark;
+  }
+
+  html {
+    background: rgb(var(--ds-background) / 1);
+    color: rgb(var(--ds-foreground) / 1);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgb(var(--ds-primary) / 0.12), transparent 35%),
+      linear-gradient(180deg, rgb(var(--ds-background) / 1), rgb(var(--ds-background) / 0.88));
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+  }
+
+  .dark body {
+    background:
+      radial-gradient(circle at top left, rgb(var(--ds-primary) / 0.18), transparent 35%),
+      linear-gradient(180deg, rgb(var(--ds-background) / 1), rgb(var(--ds-background) / 0.96));
+  }
+
+  * {
+    border-color: rgb(var(--ds-border) / 1);
+  }
+
+  ::selection {
+    background: rgb(var(--ds-primary) / 0.2);
+    color: rgb(var(--ds-foreground) / 1);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .premium-surface {
+    background: linear-gradient(180deg, rgb(var(--ds-card) / 0.94), rgb(var(--ds-background) / 1));
+    backdrop-filter: blur(16px);
+  }
+
+  .premium-card {
+    background: rgb(var(--ds-card) / 1);
+    border: 1px solid rgb(var(--ds-border) / 1);
+    box-shadow: 0 18px 40px rgb(var(--ds-primary) / 0.1);
+  }
+
+  .premium-ring {
+    box-shadow: 0 0 0 4px rgb(var(--ds-ring) / 1);
+  }
+
+  .skeleton-shimmer {
+    background-image: linear-gradient(90deg, rgb(var(--ds-muted-foreground) / 0.16) 25%, rgb(var(--ds-card) / 0.72) 50%, rgb(var(--ds-muted-foreground) / 0.16) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
