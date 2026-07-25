@@ -221,6 +221,14 @@ const reportItems: ReportItem[] = Array.from({ length: 30 }, (_, index) => ({
   status: pick(reportStatuses, index),
 }));
 
+const medicines = medications.map((name, index) => ({
+  id: `MED-${index + 1}`,
+  name,
+  dosage: `${250 + index * 50}mg`,
+  frequency: index % 2 === 0 ? 'Twice daily' : 'Once daily',
+  use: pick(conditions, index),
+}));
+
 const quickActions = [
   { label: 'Add Patient', description: 'Record new admissions and demographic details.' },
   { label: 'Schedule Appointment', description: 'Book follow-ups and specialist consults.' },
@@ -280,11 +288,3 @@ export const healthcareData = {
   medicines,
   currency,
 };
-
-export const medicines = medications.map((name, index) => ({
-  id: `MED-${index + 1}`,
-  name,
-  dosage: `${250 + index * 50}mg`,
-  frequency: index % 2 === 0 ? 'Twice daily' : 'Once daily',
-  use: pick(conditions, index),
-}));

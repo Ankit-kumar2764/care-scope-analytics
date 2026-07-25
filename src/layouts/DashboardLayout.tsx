@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, ChevronLeft, ChevronRight, LayoutDashboard, Menu, MoonStar, Search, Settings, Shield, Stethoscope, BellRing, User, LogOut, FileText, CalendarDays, Brain, BarChart3, MonitorPulse, Hospital, ClipboardList } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, LayoutDashboard, Menu, MoonStar, Search, Settings, Shield, Stethoscope, BellRing, User, LogOut, FileText, CalendarDays, Brain, BarChart3, Activity, Hospital, ClipboardList } from 'lucide-react';
 import { NavLink, Outlet, useLocation, Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@/hooks/useTheme';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -17,7 +17,7 @@ const navItems = [
   { label: 'Diagnostics', path: '/diagnostics', icon: FileText },
   { label: 'Predictive Analytics', path: '/predictive-analytics', icon: Brain },
   { label: 'Appointments', path: '/appointments', icon: CalendarDays },
-  { label: 'Monitoring', path: '/monitoring', icon: MonitorPulse },
+  { label: 'Monitoring', path: '/monitoring', icon: Activity },
   { label: 'Reports', path: '/reports', icon: BarChart3 },
   { label: 'Settings', path: '/settings', icon: Settings },
 ];
