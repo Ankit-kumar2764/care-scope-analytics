@@ -211,6 +211,12 @@ export function DashboardLayout() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+
+
   const breadcrumb = useMemo(() => {
     const segments = location.pathname.split('/').filter(Boolean);
     if (segments.length === 0) return [{ label: 'Dashboard', path: '/dashboard' }];
