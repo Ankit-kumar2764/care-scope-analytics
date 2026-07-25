@@ -1,4 +1,38 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+import { cn } from '@/utils/cn';
+
+type ChartFrameProps = HTMLAttributes<HTMLDivElement> & {
+  title: string;
+  description?: string;
+  actions?: ReactNode;
+  legend?: Array<{ label: string; color: string }>;
+  children: ReactNode;
+};
+
+export function ChartFrame({ className, title, description, actions, legend, children, ...props }: ChartFrameProps) {
+  return (
+    <section className={cn('rounded-[16px] border border-border bg-card p-5 shadow-card lg:p-6', className)} {...props}>
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h3 className="text-base font-semibold tracking-tight text-foreground lg:text-lg">{title}</h3>
+          {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
+        </div>
+        {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
+      </div>
+      {legend ? (
+        <div className="mb-4 flex flex-wrap gap-3">
+          {legend.map((item) => (
+            <div key={item.label} className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+              {item.label}
+            </div>
+          ))}
+        </div>
+      ) : null}
+      {children}
+    </section>
+  );
+}import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '../../utils/cn';
 
 type ChartLegendItem = {

@@ -1,1 +1,1 @@
-export * from './chart-frame';
+export * from './chart-frame';export * from './chart-frame';
